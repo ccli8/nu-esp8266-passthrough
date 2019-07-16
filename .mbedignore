@@ -1,0 +1,16 @@
+mbed-os/features/cellular/*
+mbed-os/features/FEATURE_CLIENT/*
+mbed-os/features/FEATURE_UVISOR/*
+mbed-os/features/frameworks/mbed-client-cli/*
+mbed-os/features/frameworks/mbed-client-randlib/*
+mbed-os/features/frameworks/mbed-coap/*
+mbed-os/features/frameworks/mbed-trace/source/*
+mbed-os/features/frameworks/nanostack-libservice/source/*
+mbed-os/features/lwipstack/*
+mbed-os/features/nanostack/*
+mbed-os/features/netsocket/*.cpp
+mbed-os/features/netsocket/cellular/*
+mbed-os/features/netsocket/emac-drivers/*
+mbed-os/features/lorawan/*
+mbed-os/features/netsocket/NetworkInterfaceDefaults.cpp
+mbed-os/components/wifi/*
