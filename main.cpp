@@ -13,7 +13,10 @@
 UnbufferedSerial    pc(USBTX, USBRX);
 
 #elif HOST_COM_SEL == HOST_COM_NUBRIDGE
-#if defined(TARGET_NUMAKER_IOT_M487)
+#if defined(TARGET_NUMAKER_IOT_M467)
+UnbufferedSerial    pc(D3, D2);
+
+#elif defined(TARGET_NUMAKER_IOT_M487)
 UnbufferedSerial    pc(D3, D2);
 
 #elif defined(TARGET_NU_PFM_M2351)
@@ -27,7 +30,10 @@ UnbufferedSerial    pc(D4, D5);
 
 #if ESP8266_AT_SEL == ESP8266_AT_ONBOARD
 
-#if defined(TARGET_NUMAKER_IOT_M487)
+#if defined(TARGET_NUMAKER_IOT_M467)
+UnbufferedSerial    dev(PC_1, PC_0);
+
+#elif defined(TARGET_NUMAKER_IOT_M487)
 UnbufferedSerial    dev(PH_8, PH_9);
 
 #elif defined(TARGET_NU_PFM_M2351)
