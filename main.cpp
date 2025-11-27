@@ -1,5 +1,9 @@
 #include "mbed.h"
 
+#if MBED_MAJOR_VERSION < 6
+#define UnbufferedSerial RawSerial
+#endif
+
 #define HOST_COM_SEL            HOST_COM_NULINK
 #define ESP8266_AT_SEL          ESP8266_AT_ONBOARD
 
@@ -13,7 +17,10 @@
 UnbufferedSerial    pc(USBTX, USBRX);
 
 #elif HOST_COM_SEL == HOST_COM_NUBRIDGE
-#if defined(TARGET_NUMAKER_IOT_M487)
+#if defined(TARGET_NUMAKER_IOT_M467)
+UnbufferedSerial    pc(D3, D2);
+
+#elif defined(TARGET_NUMAKER_IOT_M487)
 UnbufferedSerial    pc(D3, D2);
 
 #elif defined(TARGET_NU_PFM_M2351)
@@ -27,7 +34,10 @@ UnbufferedSerial    pc(D4, D5);
 
 #if ESP8266_AT_SEL == ESP8266_AT_ONBOARD
 
-#if defined(TARGET_NUMAKER_IOT_M487)
+#if defined(TARGET_NUMAKER_IOT_M467)
+UnbufferedSerial    dev(PC_1, PC_0);
+
+#elif defined(TARGET_NUMAKER_IOT_M487)
 UnbufferedSerial    dev(PH_8, PH_9);
 
 #elif defined(TARGET_NU_PFM_M2351)
@@ -56,10 +66,13 @@ void dev_recv()
 {
     led1 = !led1;
     while(dev.readable()) {
+#if MBED_MAJOR_VERSION >= 6
         uint8_t c;
         dev.read(&c, 1);
         pc.write(&c, 1);
-        //pc.putc(dev.getc());
+#else
+        pc.putc(dev.getc());
+#endif
     }
 }
 
@@ -67,10 +80,13 @@ void pc_recv()
 {
     led2 = !led2;
     while(pc.readable()) {
+#if MBED_MAJOR_VERSION >= 6
         uint8_t c;
         pc.read(&c, 1);
         dev.write(&c, 1);
-        //dev.putc(pc.getc());
+#else
+        dev.putc(pc.getc());
+#endif
     }
 }
 
